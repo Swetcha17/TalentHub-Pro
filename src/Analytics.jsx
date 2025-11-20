@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import './Analytics.css';
 
-const API_URL = 'http://localhost:5001';
+const API_URL =
+  process.env.NODE_ENV === 'production'
+    ? ''
+    : 'http://localhost:5001';
 
 function Analytics() {
   const [analytics, setAnalytics] = useState(null);
