@@ -4380,12 +4380,15 @@ def run_cli():
 
 if __name__ == "__main__":
     import sys
-    if '--web' in sys.argv or '-w' in sys.argv:
+
+    # Local development mode: python parse.py --web
+    if "--web" in sys.argv or "-w" in sys.argv:
         if app is None:
-            print("\nFlask not installed. Install with: pip install flask")
+            print("\nFlask not installed. Install with: pip install flask\n")
         else:
             print("\nStarting Advanced Resume Search System...")
             print("Open your browser to: http://localhost:5001\n")
-            app.run(debug=False, port=5001, host='0.0.0.0')
+            app.run(debug=False, port=5001, host="0.0.0.0")
     else:
+        # Default CLI mode
         run_cli()
