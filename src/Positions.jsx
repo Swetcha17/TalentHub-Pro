@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './Positions.css';
 
-const API_URL = 'http://localhost:5001';
+const API_URL =
+  process.env.NODE_ENV === 'production'
+    ? ''
+    : 'http://localhost:5001';
+
 
 function Positions() {
   const [positions, setPositions] = useState([]);
