@@ -1,35 +1,3 @@
-"""
-Advanced Resume Parser with Free AI Semantic Search
-
-IMPROVEMENTS IN THIS VERSION:
-1. FIXED: Empty search now returns all resumes (for dashboard view)
-2. ADDED: Free AI semantic search using Hugging Face or Ollama
-3. ADDED: Embedding cache for fast repeated searches
-4. ADDED: use_ai parameter in search API
-
-QUICK START:
-1. Basic usage (keyword search only):
-   python parse.py --web
-
-2. With AI search enabled:
-   - Set AI_SEARCH_ENABLED = True below
-   - Get free HF token: https://huggingface.co/settings/tokens
-   - Set environment variable: export HF_TOKEN=your_token
-   - Run: python parse.py --web
-
-3. For unlimited AI search:
-   - Install Ollama: curl -fsSL https://ollama.com/install.sh | sh
-   - Download model: ollama pull nomic-embed-text
-   - Start server: ollama serve
-   - Set AI_PROVIDER = 'ollama' below
-   - Run: python parse.py --web
-
-API USAGE:
-- Keyword search: POST /api/search with {"query": "python developer"}
-- AI search: POST /api/search with {"query": "experienced cloud engineer", "use_ai": true}
-
-"""
-
 import os
 import re
 import json
@@ -4413,13 +4381,11 @@ def run_cli():
 if __name__ == "__main__":
     import sys
     if '--web' in sys.argv or '-w' in sys.argv:
-        app = create_web_ui()
-        if app:
+        if app is None:
+            print("\nFlask not installed. Install with: pip install flask")
+        else:
             print("\nStarting Advanced Resume Search System...")
             print("Open your browser to: http://localhost:5001\n")
             app.run(debug=False, port=5001, host='0.0.0.0')
-        else:
-            print("\nFlask not installed. Install with: pip install flask")
-            print("Or run without --web flag for CLI mode\n")
     else:
         run_cli()
