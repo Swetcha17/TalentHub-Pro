@@ -4378,6 +4378,8 @@ def run_cli():
             print("\nGoodbye!")
             break
 
+app = create_web_ui()
+
 if __name__ == "__main__":
     import sys
 
